@@ -21,11 +21,17 @@ defmodule Calc do
   defp operation({:div, x, y}), do: div(x, y)
 end
 
-result = Calc.sum(2, 3)
-IO.puts("result is #{result}")
-result = Calc.sub(4, 3)
-IO.puts("result is #{result}")
-result = Calc.mul(2, 3)
-IO.puts("result is #{result}")
-result = Calc.div_int(9, 3)
-IO.puts("result is #{result}")
+defmodule Calc.CLI do
+  def start() do
+    [n1, n2] =
+      IO.gets("Insert two numbers: ")
+      |> String.split(" ")
+      |> Enum.map(&String.trim/1)
+      |> Enum.map(&String.to_integer/1)
+      |> Enum.into([])
+
+    IO.puts("The nums are #{n1} #{n2}")
+  end
+end
+
+Calc.CLI.start()
