@@ -1,4 +1,4 @@
-defmodule Mates do
+defmodule Calc do
   def sum(x, y) do
     operation({:sum, x, y})
   end
@@ -15,37 +15,17 @@ defmodule Mates do
     operation({:div, x, y})
   end
 
-  # private fn
-  defp operation(params) do
-    {op, x, y} = params
-    # if only support 2 blocks
-    # if op == :sum, do: x + y, else: x - y
-    # switch in other languages
-    cond do
-      op == :sum ->
-        x + y
-
-      op == :sub ->
-        x - y
-
-      op == :mul ->
-        x * y
-
-      op == :div ->
-        div(x, y)
-
-      true ->
-        IO.puts(:stderr, "not supported operations")
-        :error
-    end
-  end
+  defp operation({:sum, x, y}), do: x + y
+  defp operation({:sub, x, y}), do: x - y
+  defp operation({:mul, x, y}), do: x * y
+  defp operation({:div, x, y}), do: div(x, y)
 end
 
-result = Mates.sum(2, 3)
+result = Calc.sum(2, 3)
 IO.puts("result is #{result}")
-result = Mates.sub(4, 3)
+result = Calc.sub(4, 3)
 IO.puts("result is #{result}")
-result = Mates.mul(2, 3)
+result = Calc.mul(2, 3)
 IO.puts("result is #{result}")
-result = Mates.div_int(9, 3)
+result = Calc.div_int(9, 3)
 IO.puts("result is #{result}")
