@@ -4,6 +4,7 @@ defmodule Calc.CLI do
     op = IO.gets("Insert operation (+-*/): ") |> parse_op_input()
     result = make_operation(op, {n1, n2})
     IO.puts("El result from #{n1} #{op} #{n2} = #{result}")
+    System.halt(0)
   end
 
   defp make_operation(op, {n1, n2}) do
