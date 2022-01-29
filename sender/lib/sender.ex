@@ -9,7 +9,13 @@ defmodule Sender do
     {:ok, "email_sent"}
   end
 
-  def notify_all(email) do
-    Enum.each(email, &send_email/1)
+  def notify_all(emails) do
+    emails
+    |> Enum.map(fn email ->
+      Task.async(fn ->
+        send_email(email)
+      end)
+    end)
+    |> Enum.map(&Task.await/1)
   end
 end
