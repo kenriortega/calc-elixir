@@ -8,13 +8,16 @@ defmodule Calc do
   iex> Calc.sum(25,11)
   36
   """
+
+  # Alias and Imports
   alias Calc.Operation
+  import Calc.Private, only: :functions
 
   @doc """
   Add `x` and `y` and return the result of the sum
   """
   def sum(x, y) do
-    Calc.Private.operation(%Operation{a: x, b: y, operation: &+/2})
+    operation(%Operation{a: x, b: y, operation: &+/2})
   end
 
   @doc """
@@ -25,14 +28,14 @@ defmodule Calc do
   4
   """
   def sub(x, y) do
-    Calc.Private.operation(%Operation{a: x, b: y, operation: &-/2})
+    operation(%Operation{a: x, b: y, operation: &-/2})
   end
 
   def mul(x, y) do
-    Calc.Private.operation(%Operation{a: x, b: y, operation: &*/2})
+    operation(%Operation{a: x, b: y, operation: &*/2})
   end
 
   def divi(x, y) when x > 0 and y > 0 do
-    Calc.Private.operation(%Operation{a: x, b: y, operation: &div/2})
+    operation(%Operation{a: x, b: y, operation: &div/2})
   end
 end
