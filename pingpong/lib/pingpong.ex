@@ -3,6 +3,8 @@ defmodule Pingpong do
     make_process()
     |> run()
 
+    init_state()
+
     receive do
       {:DOWN, _ref, :process, pid, reason} ->
         IO.puts("Process down #{Atom.to_string(reason)}")
@@ -22,5 +24,12 @@ defmodule Pingpong do
     Process.send_after(ping, :boom, 5_000)
     Process.monitor(ping)
     Process.monitor(pong)
+  end
+
+  def init_state() do
+    case Process.whereis(:state) do
+      nil -> State.start()
+      _ -> nil
+    end
   end
 end
